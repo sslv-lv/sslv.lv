@@ -6,6 +6,12 @@
 
 ## Project Setup
 
+### Install node/npm
+
+Download and install [node](https://nodejs.org/en/download)
+
+### Install dependencies
+
 Verify that console is in the same directory as package.json
 
 ```sh
