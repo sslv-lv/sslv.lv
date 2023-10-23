@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import SiteHeader from './common/components/SiteHeader.vue'
+import DropDown from './common/components/DropDown.vue';
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import SiteHeader from './common/components/SiteHeader.vue'
       <nav>
         <RouterLink to="/">Home</RouterLink>
       </nav>
+      <DropDown/>
     </div>
   </header>
 
