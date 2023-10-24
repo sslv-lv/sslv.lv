@@ -7,7 +7,8 @@ import { collection, getDocs } from 'firebase/firestore'
 const db = useFirestore()
 getDocs(collection(db, 'users')).then((docs) =>
   docs.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.data()}`)
+    console.log(doc.id)
+    console.table(doc.data())
   })
 )
 </script>

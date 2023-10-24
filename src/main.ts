@@ -11,13 +11,13 @@ import App from './App.vue'
 import router from './common/router'
 
 const firebaseConfig = {
-  apiKey: import.meta.env.FIREBASE_API_KEY,
-  authDomain: import.meta.env.FIREBASE_DOMAIN,
-  projectId: import.meta.env.FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.FIREBASE_APP_ID
-}
+    apiKey: "AIzaSyD_hj26e-UAANcpsXnGK_ln1oKjURtZa78",
+    authDomain: "v-lv-b8871.firebaseapp.com",
+    projectId: "v-lv-b8871",
+    storageBucket: "v-lv-b8871.appspot.com",
+    messagingSenderId: "847778143571",
+    appId: "1:847778143571:web:42fb61503766c39540d5a6"
+  }
 
 const app = createApp(App)
 
