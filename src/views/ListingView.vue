@@ -69,12 +69,7 @@
 
 <script>
 export default {
-  name: "CarComponent",
-  data() {
-    return {
-      // any dynamic data goes here
-    };
-  },
+  name: "ListingView",
   methods: {
     goBack() {
       this.$router.go(-1);
