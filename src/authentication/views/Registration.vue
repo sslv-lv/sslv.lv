@@ -18,7 +18,7 @@
 
   <script>
   export default {
-    name: "RegistrationView",
+    name: "Registration",
   };
   </script>
 
