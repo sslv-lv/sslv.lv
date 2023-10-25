@@ -1,12 +1,22 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import SiteHeader from './common/components/SiteHeader.vue'
+import { useFirestore } from 'vuefire'
+import { collection, getDocs } from 'firebase/firestore'
+
+const db = useFirestore()
+getDocs(collection(db, 'users')).then((docs) =>
+  docs.forEach((doc) => {
+    console.log(doc.id)
+    console.table(doc.data())
+  })
+)
 </script>
 
 <template>
   <header>
-    <SiteHeader/>
-    <div class="wrapper">
+    <SiteHeader />
+    <div class="wrapper container">
       <nav>
         <RouterLink to="/">Home</RouterLink>
       </nav>
