@@ -19,6 +19,12 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
+  --primary-blue-extra-dark: #0D1321;
+  --primary-blue-dark: #1D2D44;
+  --primary-blue: #3E5C76;
+  --primary-blue-light: #748CAB;
+  --primary-egg: #F0EBD8;
 }
 
 /* semantic color variables for this project */
