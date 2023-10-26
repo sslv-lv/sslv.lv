@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+function alert(a) {
+  window.alert(a)
+}
+
 </script>
 
 <template>
   <header class="navbar">
-    <span>Sākums</span>
-    <span>Mani sludinājumi</span>
-    <span>Par mums</span>
-    <span>Cenas</span>
-    <span>Ienākt</span>
-    <span>Admin</span>
+    <RouterLink to="/"> <span>Sākums</span> </RouterLink>
+    <span @click="alert('Not implemented')">Mani sludinājumi</span>
+    <span @click="alert('Not implemented')">Par mums</span>
+    <span @click="alert('Not implemented')">Cenas</span>
+    <span data-bs-toggle="modal" data-bs-target="#loginModal">Ienākt</span>
     <input type="text" placeholder="Meklēt" />
-    <RouterLink to="/"><button>Meklēt</button></RouterLink>
+    <RouterLink to="/search"> <button>Meklēt</button> </RouterLink>
   </header>
 </template>
 
