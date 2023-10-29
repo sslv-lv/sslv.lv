@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import ListingView from '../../adverisements/views/ListingView.vue'
-import CommonList from "../../adverisements/views/CommonList.vue";
+import HomeView from '@/common/views/HomeView.vue'
+import ListingView from '@/adverisements/views/ListingView.vue'
+import CommonList from "@/adverisements/views/CommonList.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
