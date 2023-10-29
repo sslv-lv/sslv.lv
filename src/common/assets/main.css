@@ -11,6 +11,10 @@
 
 body {
   padding-top: 58px;
+
+  > .alert {
+    z-index: 2000;
+  }
 }
 
 a,
