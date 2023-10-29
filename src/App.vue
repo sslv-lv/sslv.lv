@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import SiteHeader from './common/components/SiteHeader.vue'
 import { useFirestore } from 'vuefire'
 import { collection, getDocs } from 'firebase/firestore'

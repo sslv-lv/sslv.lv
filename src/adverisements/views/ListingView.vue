@@ -1,11 +1,26 @@
+<script setup lang="ts">
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+
+function goBack() {
+  router.go(-1)
+}
+
+function displayChat() {
+  alert("Imagine this is chat appearing")
+}
+</script>
+
 <template>
   <div class="car-container">
     <button @click="goBack" class="back-button">← Back</button>
-    <div class="car-title">
-      Limuzīns Jāņu nakts krāsās - žigulis
-    </div>
+    <div class="car-title">Limuzīns Jāņu nakts krāsās - žigulis</div>
     <div class="car-image">
-      <img src="https://img4.spoki.lv/upload/articles/26/265430/images/Zigulis-7.jpg" alt="Car Image">
+      <img
+        src="https://img4.spoki.lv/upload/articles/26/265430/images/Zigulis-7.jpg"
+        alt="Car Image"
+      />
     </div>
     <div class="car-details">
       <table>
@@ -57,27 +72,14 @@
         </tbody>
       </table>
       <p>
-        Klasiskais luksa žigulis Vaz 2106 ar oriģinālo 1600 cm³ motoru, kam tikko veikta pilna apkope, a.t.c.
+        Klasiskais luksa žigulis Vaz 2106 ar oriģinālo 1600 cm³ motoru, kam tikko veikta pilna
+        apkope, a.t.c.
       </p>
-      <p>
-        Vēsturiskā spēkrata statusa VRN ir cits.
-      </p>
-      <button>Rakstīt īpašniekam</button>
+      <p>Vēsturiskā spēkrata statusa VRN ir cits.</p>
+      <button @click="displayChat()">Rakstīt īpašniekam</button>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: "ListingView",
-  methods: {
-    goBack() {
-      this.$router.go(-1);
-    },
-    // any other methods go here
-  },
-};
-</script>
 
 <style scoped>
 .back-button {
@@ -88,7 +90,7 @@ export default {
   font-size: 18px;
   cursor: pointer;
   position: absolute;
-  top: 20px;
+  top: calc(20 + 58)px; /* Header height is 58px */
   left: 20px;
 }
 

@@ -1,63 +1,39 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink } from 'vue-router'
+function alert(a: string) {
+  window.alert(a)
+}
 </script>
 
 <template>
-  <header class="navbar">
-    <span>Sākums</span>
-    <span>Mani sludinājumi</span>
-    <span>Par mums</span>
-    <span>Cenas</span>
-    <span>Ienākt</span>
-    <span>Admin</span>
-    <input type="text" placeholder="Meklēt" />
-    <RouterLink to="/"><button>Meklēt</button></RouterLink>
+  <header class="navbar fixed-top navbar-expand-lg bg-secondary-subtle">
+    <div class="container-fluid">
+      <div class="navbar-brand">
+        <RouterLink to="/"> <span>SSLV.LV</span> </RouterLink>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <RouterLink to="/">
+              <a class="nav-link active" aria-current="page" href="#"> Sākums </a>
+            </RouterLink>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal" href="#">
+              Ienākt
+            </a>
+          </li>
+        </ul>
+      </div>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Meklēt" aria-label="Meklēt" />
+        <button class="btn btn-outline-success" type="submit" @click="alert('Meklējam kaut ko')">
+          Meklēt
+        </button>
+      </form>
+    </div>
   </header>
 </template>
 
 <style lang="scss" scoped>
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  background-color: black;
-  color: white;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  width: 100%;
-
-  span {
-    margin-right: 20px;
-    cursor: pointer;
-    transition: color 0.3s;
-
-    &:hover {
-      color: gray;
-    }
-  }
-
-  input {
-    padding: 5px 10px;
-    border: 1px solid #d1d1d1;
-    border-radius: 4px;
-  }
-
-  button {
-    padding: 5px 15px;
-    background-color: blue;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background-color: darkblue;
-    }
-  }
-}
 </style>
