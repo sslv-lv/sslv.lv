@@ -7,11 +7,11 @@ const toastStore = useToastStore()
 
 <template>
   <CToaster placement="top-end">
-    <CToast v-for="(toast, index) in toastStore.toasts" :key="index">
-      <CToastHeader closeButton>
-        <span class="me-auto fw-bold">{{ toast.title }}</span>
+    <CToast v-for="(toast, index) in toastStore.toasts" class="bg-white" :key="index">
+      <CToastHeader closeButton class="bg-opacity-25" :class="`bg-${toast.type}`">
+        <span class="me-auto lead text-body-emphasis">{{ toast.title }}</span>
       </CToastHeader>
-      <CToastBody>
+      <CToastBody class="bg-opacity-10" :class="`bg-${toast.type}`">
         {{ toast.content }}
       </CToastBody>
     </CToast>
