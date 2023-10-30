@@ -12,16 +12,17 @@ const userStore = useUserStore()
 const toastStore = useToastStore()
 
 async function checkCredentials() {
+  //Yeah this approach is insecure as fuck, but I couldn't be bothered to setup a proper backend
   const userSnapshot = await getUser(email.value, password.value)
 
   if (userSnapshot.empty) {
     toastStore.createToast(
-      'Autentifikācija neveiksmīga',
-      'Pārbaudi ievadītos datus un mēģini velreiz!'
+      'Autentifikācija neveiksmīga!',
+      'Pārbaudi ievadītos datus un mēģini velreiz!',
+      'danger'
     )
   } else {
     const user = userSnapshot.docs[0].data()
-    console.log(user)
 
     userStore.setUser(new User(user))
     userStore.loginModalVisible = false

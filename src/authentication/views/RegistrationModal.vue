@@ -20,8 +20,9 @@ async function register() {
 
   if (!userSnapshot.empty) {
     toastStore.createToast(
-      'Lietotāja izveide neveiksmīga',
-      'Lietotājs ar šādu e-pastu jau eksistē'
+      'Lietotāja izveide neveiksmīga!',
+      'Lietotājs ar šādu e-pastu jau eksistē',
+      'danger'
     )
   } else {
     user.value.createdAt = Timestamp.fromDate(new Date())
