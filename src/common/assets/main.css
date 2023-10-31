@@ -9,6 +9,14 @@
   font-weight: normal;
 }
 
+body {
+  padding-top: 58px;
+
+  > .alert {
+    z-index: 2000;
+  }
+}
+
 a,
 .green {
   text-decoration: none;
@@ -29,8 +37,6 @@ a,
   }
 
   #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
 }
