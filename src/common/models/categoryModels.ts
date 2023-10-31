@@ -6,7 +6,7 @@ export class Category {
   id!: string;
   name!: string;
   iconUrl!: string;
-  subcategories!: Array<{}>;
+  subcategories!: {name: string}[];
   createdAt!: string;
   deletedAt!: string;
 }
