@@ -61,14 +61,7 @@ const isHoveringMap = ref<{ [key: string]: boolean }>({})
   </div>
 </template>
 
-<style>
-body {
-  background-color: #1d2d44;
-  font-family: 'Tahoma', sans-serif;
-}
-</style>
-
-<style scoped>
+<style lang="scss" scoped>
 .container-lg {
   min-width: 1024px;
   max-width: 1280px;
@@ -83,6 +76,31 @@ body {
   border-radius: 12px;
   position: relative;
   transition: filter 0.3s ease;
+
+  .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 1;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    filter: brightness(0.9);
+    z-index: 1;
+
+    .submenu {
+      display: block;
+      opacity: 0;
+      transition: opacity 0.3s;
+      opacity: 1;
+      filter: none;
+    }
+  }
 }
 
 h1 {
@@ -106,38 +124,13 @@ h1 {
   color: #0d1321;
 }
 
-.card .submenu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  z-index: 1;
-}
-
-.card:hover .submenu {
-  display: block;
-  opacity: 0;
-  transition: opacity 0.3s;
-  opacity: 1;
-  filter: none;
-}
-
-.card:hover {
-  transform: scale(1.05);
-  filter: brightness(0.9);
-  z-index: 1;
-}
-
 .submenu {
   z-index: 2;
   display: none;
-}
 
-.submenu li:hover {
-  background-color: inherit;
-  color: inherit;
+  li:hover {
+    background-color: inherit;
+    color: inherit;
+  }
 }
 </style>
