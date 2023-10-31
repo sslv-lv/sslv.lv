@@ -3,9 +3,10 @@ export class Category {
       Object.assign(this, props);
   }
 
-  id!: number;
+  id!: string;
   name!: string;
-  property_template!: Array<String>;
-  created_at!: string;
-  deleted_at!: string;
+  iconUrl!: string;
+  subcategories!: Array<{}>;
+  createdAt!: string;
+  deletedAt!: string;
 }
