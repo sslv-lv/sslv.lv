@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/common/views/HomeView.vue'
+// adverisements is misspelled, should be advertisements
 import ListingView from '@/adverisements/views/ListingView.vue'
 import CommonList from "@/adverisements/views/CommonList.vue";
+import AdCreation from '@/adverisements/views/AdCreation.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,7 +28,12 @@ const router = createRouter({
       path: "/:pathMatch(.*)*",
       name: 'not-found',
       redirect: 'home',
-    }
+    },
+    {
+    path: '/advertisements/create',
+    name: 'AdCreation',
+    component: AdCreation,
+  }
   ]
 })
 
