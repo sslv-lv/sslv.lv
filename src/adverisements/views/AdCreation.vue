@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useFirestore } from 'vuefire';
+import { useRouter } from 'vue-router';
 import { Category } from '@/common/models/categoryModels';
 import { collection, getDocs, addDoc, Timestamp } from 'firebase/firestore';
 import { uploadBytes, getDownloadURL, getStorage, ref as firebaseRef } from 'firebase/storage';
+import { useUserStore } from '@/common/stores/userStore';
 
 const db = useFirestore();
 const storage = getStorage();
+const userStore = useUserStore();
+const router = useRouter();
 
 const categories = ref<Category[]>([]);
 const selectedCategory = ref<string | null>(null);
@@ -69,7 +73,7 @@ function triggerFileInput() {
 }
 
 async function uploadImage(file: File) {
-  const uniqueName = new Date().getTime() + '_' + file.name;  // Adding a timestamp to ensure uniqueness
+  const uniqueName = new Date().getTime() + '_' + file.name;
   const storageReference = firebaseRef(storage, `images/${uniqueName}`);
   await uploadBytes(storageReference, file);
   return getDownloadURL(storageReference);
@@ -82,19 +86,21 @@ async function submitForm() {
 
     const listingData = {
       category: selectedCategory.value,
-      created: Timestamp.fromDate(new Date()),  // changed from new Date().toISOString()
+      created: Timestamp.fromDate(new Date()),
       description: description.value,
       images: uploadedImageUrls,
-      last_edit: Timestamp.fromDate(new Date()),  // changed from new Date().toISOString()
+      last_edit: Timestamp.fromDate(new Date()),
       price: price.value,
       status: "active",
       subcategory: selectedSubcategory.value,
       title: title.value,
-      user: "1" // TODO: Replace with the real userID once you have authentication in place
+      user: userStore.currentUser.email
     };
 
     await addDoc(collection(db, 'listings'), listingData);
-    console.log("Listing added successfully");
+    await addDoc(collection(db, 'listings'), listingData);
+    const docRef = await addDoc(collection(db, 'listings'), listingData);  // Capture the DocumentReference
+    router.push(`/${listingData.category}/${listingData.subcategory}/${docRef.id}`);  // Use router.push without this
   } catch (error) {
     console.error("Error adding listing:", error);
   }
