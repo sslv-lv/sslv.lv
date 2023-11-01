@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useFirestore } from 'vuefire';
-import { collection, getDocs } from 'firebase/firestore';
 import { Category } from '@/common/models/categoryModels';
-import { addDoc, doc, setDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, Timestamp } from 'firebase/firestore';
 import { uploadBytes, getDownloadURL, getStorage, ref as firebaseRef } from 'firebase/storage';
 
+const db = useFirestore();
 const storage = getStorage();
 
-const db = useFirestore();
 const categories = ref<Category[]>([]);
 const selectedCategory = ref<string | null>(null);
 const selectedSubcategory = ref<string | null>(null);
@@ -70,29 +69,30 @@ function triggerFileInput() {
 }
 
 async function uploadImage(file: File) {
-  const storageReference = firebaseRef(storage, `images/${file.name}`);
+  const uniqueName = new Date().getTime() + '_' + file.name;  // Adding a timestamp to ensure uniqueness
+  const storageReference = firebaseRef(storage, `images/${uniqueName}`);
   await uploadBytes(storageReference, file);
   return getDownloadURL(storageReference);
 }
 
 async function submitForm() {
-  const imageUrlPromises = images.value.map(img => uploadImage(img));
-  const uploadedImageUrls = await Promise.all(imageUrlPromises);
-
-  const listingData = {
-    category: selectedCategory.value,
-    created: new Date().toISOString(),
-    description: description.value,
-    images: uploadedImageUrls,
-    last_edit: new Date().toISOString(),
-    price: price.value,
-    status: "active",
-    subcategory: selectedSubcategory.value,
-    title: title.value,
-    user: "1" // change out for real userID
-  };
-
   try {
+    const imageUrlPromises = images.value.map(img => uploadImage(img));
+    const uploadedImageUrls = await Promise.all(imageUrlPromises);
+
+    const listingData = {
+      category: selectedCategory.value,
+      created: Timestamp.fromDate(new Date()),  // changed from new Date().toISOString()
+      description: description.value,
+      images: uploadedImageUrls,
+      last_edit: Timestamp.fromDate(new Date()),  // changed from new Date().toISOString()
+      price: price.value,
+      status: "active",
+      subcategory: selectedSubcategory.value,
+      title: title.value,
+      user: "1" // TODO: Replace with the real userID once you have authentication in place
+    };
+
     await addDoc(collection(db, 'listings'), listingData);
     console.log("Listing added successfully");
   } catch (error) {
