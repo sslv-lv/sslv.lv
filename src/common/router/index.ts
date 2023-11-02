@@ -1,9 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/common/views/HomeView.vue';
-// adverisements is misspelled, should be advertisements
 import ListingView from '@/common/views/ListingView.vue';
-import CommonList from "@/adverisements/views/CommonList.vue";
-import AdCreation from '@/adverisements/views/AdCreation.vue';
+import CommonList from "@/advertisements/views/CommonList.vue";
+import AdCreation from '@/advertisements/views/AdCreation.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
