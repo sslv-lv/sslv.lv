@@ -56,5 +56,8 @@
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 80
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
   }
 }

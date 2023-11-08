@@ -1,4 +1,6 @@
-import './common/assets/main.css'
+import '@/common/assets/main.css'
+// Importing this initializes some components
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as bootstrap from 'bootstrap'
 
 import { createApp } from 'vue'
@@ -7,8 +9,8 @@ import { createPinia } from 'pinia'
 import { initializeApp } from 'firebase/app'
 import { VueFire } from 'vuefire'
 
-import App from './App.vue'
-import router from './common/router'
+import App from '@/App.vue'
+import router from '@/common/router'
 
 const firebaseConfig = {
     apiKey: "AIzaSyD_hj26e-UAANcpsXnGK_ln1oKjURtZa78",

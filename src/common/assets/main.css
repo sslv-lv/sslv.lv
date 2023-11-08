@@ -9,28 +9,24 @@
   font-weight: normal;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-}
+body {
+  padding-top: 58px;
+  background-color: var(--color-background);
+  font-family: 'Roboto', 'Tahoma', sans-serif;
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+
+  > .alert {
+    z-index: 2000;
   }
 }
 
 @media (min-width: 1024px) {
   body {
     display: flex;
-    place-items: center;
+    justify-items: center;
   }
 
   #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
 }
