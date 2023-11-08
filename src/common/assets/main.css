@@ -11,7 +11,7 @@
 
 body {
   padding-top: 58px;
-  background-color: #1d2d44;
+  background-color: var(--color-background);
   font-family: 'Tahoma', sans-serif;
 
 

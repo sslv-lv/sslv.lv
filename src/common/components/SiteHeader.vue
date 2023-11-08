@@ -11,7 +11,7 @@ function alert(a: string) {
 </script>
 
 <template>
-  <header class="navbar fixed-top navbar-expand-sm bg-secondary-subtle">
+  <header class="navbar fixed-top navbar-expand-sm">
     <div class="container-fluid">
       <div class="navbar-brand">
         <RouterLink to="/"> <span>SSLV.LV</span> </RouterLink>
@@ -22,12 +22,13 @@ function alert(a: string) {
             <a class="nav-link active text-center" aria-current="page" href="#"> Sākums </a>
           </RouterLink>
         </li>
+        <li v-if="userStore.isLoggedIn" class="nav-item">
+          <RouterLink :to="{ name: 'AdCreation' }">
+            <a class="nav-link active text-center" aria-current="page"> Ievietot sludinājumu </a>
+          </RouterLink>
+        </li>
         <li class="nav-item">
-          <a
-            v-if="!userStore.isLoggedIn"
-            class="nav-link text-center"
-            @click="userStore.loginModalVisible = true"
-          >
+          <a v-if="!userStore.isLoggedIn" class="nav-link text-center" @click="userStore.loginModalVisible = true">
             Ienākt
           </a>
           <template v-else>
@@ -45,3 +46,26 @@ function alert(a: string) {
     </div>
   </header>
 </template>
+
+<style lang="scss" scoped>
+header {
+  background-color: var(--c-platinum);
+
+  * {
+    text-decoration: none;
+  }
+
+  .navbar-brand a {
+    color: var(--color-heading) !important;
+    font-style: italic;
+  }
+  .nav-item a {
+    color: var(--color-heading) !important;
+    transition: 0.4s;
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--c-platinum), #000 15%);
+    }
+  }
+}
+</style>
