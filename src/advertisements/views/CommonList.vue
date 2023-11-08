@@ -42,8 +42,6 @@ const lastVisible = ref<QueryDocumentSnapshot<DocumentData> | null>(null)
 const allAdsLoaded = ref(false)
 const listingsRef = collection(db, 'listings')
 
-
-
 const fetchFieldsForCurrentSubcategory = async (categoryName: string, subcategoryName: string) => {
   const categoriesRef = collection(db, 'categories')
   const q = query(categoriesRef, where('name', '==', categoryName))
@@ -147,11 +145,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="d-flex flex-row">
-    <div>
+  <div class="container-fluid d-flex flex-row h-100">
+    <div class="row">
       <!-- Collapsible sidebar content -->
       <div
-        :class="['sidebar', 'sticky-top', isSidebarVisible ? 'show' : 'collapse']"
+        class="sidebar sticky-top"
+        :class="[isSidebarVisible ? 'show' : 'collapse']"
         id="filterSidebar"
       >
         <div class="position-sticky pt-3 ps-3">
@@ -172,8 +171,8 @@ onUnmounted(() => {
         </div>
       </div>
     </div>
-    <main class="flex-grow-1">
-      <h1>Sludinājumi</h1>
+    <main class="flex-grow-1 listing-container">
+      <h1 class="ps-4">Sludinājumi</h1>
       <div class="container mt-4">
         <ul class="nav nav-tabs">
           <li class="nav-item">
@@ -233,15 +232,38 @@ onUnmounted(() => {
   </div>
 </template>
 
-<style>
+<style lang="scss">
+#app {
+  margin: 0;
+  padding: 0;
+  max-width: initial;
+  flex-grow: 1;
+}
+
+.listing-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
 h1 {
   font-weight: bold;
   font-style: italic;
-  color: #0d1321;
+  color: var(--c-platinum);
 }
 
 .nav-link {
-  color: #1d2d44;
+  color: var(--c-white);
+
+  &:hover {
+    background-color: var(--c-platinum);
+    color: var(--color-background);
+  }
+}
+
+.list-group {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .list-group-item {
@@ -280,26 +302,24 @@ main {
   padding-left: 15px;
 }
 
+.sidebar {
+  padding-top: 70px;
+  z-index: 100;
+  transition: all 0.3s ease;
+  background-color: var(--c-platinum);
+}
 
-  .sidebar {
-    padding-top: 70px;
-    z-index: 100;
-    transition: all 0.3s ease;
-    background-color: var(--c-platinum);
-  }
-
-  .filter-toggle-button {
-    position: absolute;
-    top: 50%;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    z-index: 1020;
-    background-color: #748cab;
-    border: none;
-    transition: left 0.3s;
-  }
-
+.filter-toggle-button {
+  position: absolute;
+  top: 50%;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  z-index: 1020;
+  background-color: #748cab;
+  border: none;
+  transition: left 0.3s;
+}
 
 .my-custom-bg {
   background-color: #1d2d44;
