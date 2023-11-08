@@ -49,7 +49,7 @@ function alert(a: string) {
 
 <style lang="scss" scoped>
 header {
-  background-color: var(--c-orange-web);
+  background-color: var(--c-platinum);
 
   * {
     text-decoration: none;
@@ -64,7 +64,7 @@ header {
     transition: 0.4s;
 
     &:hover {
-      background-color: color-mix(in srgb, var(--c-orange-web), #000 15%);
+      background-color: color-mix(in srgb, var(--c-platinum), #000 15%);
     }
   }
 }

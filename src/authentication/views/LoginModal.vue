@@ -12,6 +12,16 @@ const userStore = useUserStore()
 const toastStore = useToastStore()
 
 async function checkCredentials() {
+  if (!email.value || !password.value) {
+    toastStore.createToast(
+      'Autentifikācija neveiksmīga!',
+      'Lūdzu ievadi visus nepieciešamos datus!',
+      'danger'
+    )
+
+    return;
+  }
+
   //Yeah this approach is insecure as fuck, but I couldn't be bothered to setup a proper backend
   const userSnapshot = await getUser(email.value, password.value)
 
@@ -84,9 +94,14 @@ function switchToRegistration() {
   }
 
   .btn-login {
-    background-color: var(--c-orange-web);
+    background-color: var(--c-oxford-blue);
+    color: var(--c-white);
+
+    &:hover,
+    &:active {
+      background-color: color-mix(in srgb, var(--c-oxford-blue), #fff 15%);
+      color: var(--c-white);
+    }
   }
 }
-
-
 </style>

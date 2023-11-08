@@ -16,6 +16,16 @@ const userStore = useUserStore()
 const toastStore = useToastStore()
 
 async function register() {
+  if (!user.value.email || !user.value.name || !user.value.password) {
+    toastStore.createToast(
+      'Lietotāja izveide neveiksmīga!',
+      'Lūdzu ievadi visus nepieciešamos datus',
+      'danger'
+    )
+
+    return;
+  }
+
   const userSnapshot = await getUser(user.value.email)
 
   if (!userSnapshot.empty) {
@@ -80,8 +90,30 @@ function switchToLogin() {
 
     <CModalFooter>
       <div class="d-grid gap-2 w-100">
-        <button class="btn btn-block btn-secondary" @click="register()">Reģistrēties</button>
+        <button class="btn btn-block btn-register" @click="register()">Reģistrēties</button>
       </div>
     </CModalFooter>
   </CModal>
 </template>
+
+<style lang="scss">
+.modal-content {
+  background-color: var(--c-platinum);
+  color: var(--c-oxford-blue);
+
+  .form-contol {
+    color: var(--c-orange-web);
+  }
+
+  .btn-register {
+    background-color: var(--c-oxford-blue);
+    color: var(--c-white);
+
+    &:hover,
+    &:active {
+      background-color: color-mix(in srgb, var(--c-oxford-blue), #fff 15%);
+      color: var(--c-white);
+    }
+  }
+}
+</style>
