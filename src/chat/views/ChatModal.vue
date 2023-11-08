@@ -2,7 +2,7 @@
     <div class="chat-container">
         <div class="card chat-card">
             <div class="card-header d-flex justify-content-between align-items-center p-3">
-                <h5 class="mb-0">Chat messages</h5>
+                <h5 class="mb-0">Ziņas</h5>
                 <div class="d-flex flex-row align-items-center">
                     <span class="badge bg-info me-3">{{ messages.length }}</span>
                     <i class="fas fa-minus me-3 text-white fa-xs"></i>
@@ -14,7 +14,7 @@
                 <!-- Chat messages display -->
                 <div v-for="(message, index) in messages" :key="index" class="chat-message">
                     <div class="d-flex justify-content-between">
-                        <p class="small mb-1" v-if="message.sender === 'You'">You</p>
+                        <p class="small mb-1" v-if="message.sender === 'You'">Tu</p>
                         <p class="small mb-1" v-else>{{ message.sender }}</p>
                         <p class="small mb-1 text-muted">{{ message.time }}</p>
                     </div>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="card-footer text-muted d-flex justify-content-between align-items-center p-3">
-                <input v-model="newMessage" type="text" class="form-control chat-input" placeholder="Type a message" />
+                <input v-model="newMessage" type="text" class="form-control chat-input" placeholder="Raksti ziņu" />
                 <button @click="sendMessage" class="btn btn-primary btn-send">
                     <i class="fas fa-paper-plane"></i>
                 </button>
