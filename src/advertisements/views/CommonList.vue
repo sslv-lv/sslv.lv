@@ -161,8 +161,6 @@ onUnmounted(() => {
 })
 
 
-///=====================================FILTERING=======================================
-
 </script>
 
 <template>
@@ -186,11 +184,12 @@ onUnmounted(() => {
     </div>
     <main class="flex-grow-1 listing-container">
       <h1 class="ps-4">Sludinājumi</h1>
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end" v-if="userStore.isLoggedIn">
         <RouterLink :to="{ name: 'AdCreation' }">
           <button type="button" class="btn custom-btn">Ievietot sludinājumu</button>
         </RouterLink>
       </div>
+
 
 
 
