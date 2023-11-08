@@ -12,7 +12,7 @@
 body {
   padding-top: 58px;
   background-color: var(--color-background);
-  font-family: 'Tahoma', sans-serif;
+  font-family: 'Roboto', 'Tahoma', sans-serif;
 
 
   > .alert {
@@ -23,7 +23,7 @@ body {
 @media (min-width: 1024px) {
   body {
     display: flex;
-    place-items: center;
+    justify-items: center;
   }
 
   #app {
