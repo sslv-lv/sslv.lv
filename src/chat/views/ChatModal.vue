@@ -4,7 +4,7 @@
             <div class="card-header d-flex justify-content-between align-items-center p-3">
                 <h5 class="mb-0">Chat messages</h5>
                 <div class="d-flex flex-row align-items-center">
-                    <span class="badge bg-info me-3">20</span>
+                    <span class="badge bg-info me-3">{{ messages.length }}</span>
                     <i class="fas fa-minus me-3 text-white fa-xs"></i>
                     <i class="fas fa-comments me-3 text-white fa-xs"></i>
                     <i class="fas fa-times text-white fa-xs"></i>
@@ -71,7 +71,7 @@ const sendMessage = () => {
 <style scoped>
 /* Styles for the chat modal */
 .chat-container {
-    background-color: #fff;
+
     /* White background */
     position: fixed;
     bottom: 20px;
