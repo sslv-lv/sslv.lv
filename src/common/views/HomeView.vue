@@ -66,7 +66,7 @@ const isHoveringMap = ref<{ [key: string]: boolean }>({})
   min-width: 1024px;
   max-width: 1280px;
   margin-top: 100px;
-  background: linear-gradient(to bottom, #f0ebd8, #1d2d44);
+  background: linear-gradient(to bottom, var(--c-platinum), var(--color-background));
 
   border-radius: 15px;
   clear: both;
@@ -83,8 +83,8 @@ const isHoveringMap = ref<{ [key: string]: boolean }>({})
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: var(--c-white);
+    border: 1px solid var(--c-white-mute);
     z-index: 1;
   }
 
@@ -106,7 +106,7 @@ const isHoveringMap = ref<{ [key: string]: boolean }>({})
 h1 {
   font-weight: bold;
   font-style: italic;
-  color: #0d1321;
+  color: var(--c-text-light-1);
 }
 
 .card-img-top {
@@ -121,7 +121,7 @@ h1 {
 .card-title {
   font-weight: bold;
   font-style: italic;
-  color: #0d1321;
+  color: var(--c-primary-blue-extra-dark);
 }
 
 .submenu {

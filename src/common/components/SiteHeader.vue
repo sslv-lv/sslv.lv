@@ -11,7 +11,7 @@ function alert(a: string) {
 </script>
 
 <template>
-  <header class="navbar fixed-top navbar-expand-sm bg-secondary-subtle">
+  <header class="navbar fixed-top navbar-expand-sm">
     <div class="container-fluid">
       <div class="navbar-brand">
         <RouterLink to="/"> <span>SSLV.LV</span> </RouterLink>
@@ -46,3 +46,26 @@ function alert(a: string) {
     </div>
   </header>
 </template>
+
+<style lang="scss" scoped>
+header {
+  background-color: var(--c-platinum);
+
+  * {
+    text-decoration: none;
+  }
+
+  .navbar-brand a {
+    color: var(--color-heading) !important;
+    font-style: italic;
+  }
+  .nav-item a {
+    color: var(--color-heading) !important;
+    transition: 0.4s;
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--c-platinum), #000 15%);
+    }
+  }
+}
+</style>
