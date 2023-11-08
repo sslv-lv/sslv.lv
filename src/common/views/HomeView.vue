@@ -1,21 +1,47 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+
+import { ref, onMounted } from 'vue'
 import { useFirestore } from 'vuefire'
 import { collection, getDocs } from 'firebase/firestore'
+import { useRouter } from 'vue-router'
 import { Category } from '@/common/models/categoryModels'
 
 // FETCH ALL CATEGORIES AND SUBCATEGORIES
 const categories = ref<Category[]>([])
-
 const db = useFirestore()
-getDocs(collection(db, 'categories')).then((categoryEntries) => {
-  categoryEntries.forEach((categoryEntry) => {
-    categories.value.push(new Category(categoryEntry.data()))
-  })
-})
+const router = useRouter()
+
+
+//Dynamic router to category/subcategory listings
+const addRoutes = (categories: Category[]) => {
+  categories.forEach((category) => {
+    router.addRoute({
+      path: `/${category.name}`,
+      name: `${category.name}`,
+      component: () => import('@/adverisements/views/CommonList.vue'),
+      children: category.subcategories.map(subcategory => ({
+        path: subcategory.name,
+        name: `${subcategory.name}`,
+        component: () => import('@/adverisements/views/CommonList.vue')
+      }))
+    });
+  });
+};
+
+onMounted(() => {
+  getDocs(collection(db, 'categories')).then((categoryEntries) => {
+    categoryEntries.forEach((categoryEntry) => {
+      categories.value.push(new Category(categoryEntry.data()))
+    });
+    addRoutes(categories.value);
+  });
+});
 
 const isHoveringMap = ref<{ [key: string]: boolean }>({})
+
+
 </script>
+
 
 <template>
   <div class="d-flex justify-content-center">
@@ -24,39 +50,29 @@ const isHoveringMap = ref<{ [key: string]: boolean }>({})
       <p>Tavs ceļš uz ātrākajiem un grandiozākajiem pirkumiem!</p>
 
       <div class="row d-flex">
-        <div
-          class="col-md-4 d-flex flex-column"
-          v-for="category in categories"
-          :key="category.name"
-        >
+        <div class="col-md-4 d-flex flex-column" v-for="category in categories" :key="category.name">
           <div class="card mb-3 flex-grow-1 position-relative">
-            <img
-              :src="`/common/assets/icons/${category.iconUrl}`"
-              alt="icon"
-              class="card-img-top mx-auto mt-2"
-            />
+            <img :src="`/common/assets/icons/${category.iconUrl}`" alt="icon" class="card-img-top mx-auto mt-2" />
             <div class="card-body">
               <h5 class="card-title">{{ category.name }}</h5>
             </div>
-            <div
-              class="submenu bg-light rounded shadow-sm position-absolute top-0 start-0 w-100 h-100"
-            >
+            <div class="submenu bg-light rounded shadow-sm position-absolute top-0 start-0 w-100 h-100">
               <ul class="list-unstyled mb-0 h-100 d-flex flex-column justify-content-center">
-                <li
-                  v-for="subcategory in category.subcategories"
-                  :key="subcategory.name"
-                  class="p-2 border-bottom"
+                <li v-for="subcategory in category.subcategories" :key="subcategory.name" class="p-2 border-bottom"
                   @mouseover="isHoveringMap[subcategory.name] = true"
                   @mouseleave="isHoveringMap[subcategory.name] = false"
-                  :class="{ 'bg-secondary text-white': isHoveringMap[subcategory.name] }"
-                >
-                  {{ subcategory.name }}
+                  :class="{ 'bg-secondary text-white': isHoveringMap[subcategory.name] }">
+                  <RouterLink class="no-underline" :to="`/${category.name}/${subcategory.name}`">
+                    {{ subcategory.name }}
+                  </RouterLink>
+
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -65,7 +81,7 @@ const isHoveringMap = ref<{ [key: string]: boolean }>({})
 .container-lg {
   min-width: 1024px;
   max-width: 1280px;
-  margin-top: 100px;
+  margin-top: 50px;
   background: linear-gradient(to bottom, #f0ebd8, #1d2d44);
 
   border-radius: 15px;
@@ -101,6 +117,11 @@ const isHoveringMap = ref<{ [key: string]: boolean }>({})
       filter: none;
     }
   }
+}
+
+.no-underline {
+  text-decoration: none;
+  color: #0d1321;
 }
 
 h1 {
