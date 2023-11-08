@@ -201,7 +201,7 @@ onUnmounted(() => {
           </li>
         </ul>
         <div v-if="sortedAdvertisements.length > 0">
-          <div class="list-group">
+          <div class="list-group rounded-bottom">
             <router-link
               v-for="ad in sortedAdvertisements"
               :key="ad.id"
@@ -259,11 +259,6 @@ h1 {
     background-color: var(--c-platinum);
     color: var(--color-background);
   }
-}
-
-.list-group {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
 }
 
 .list-group-item {
