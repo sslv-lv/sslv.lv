@@ -3,37 +3,17 @@
 import { ref, onMounted } from 'vue'
 import { useFirestore } from 'vuefire'
 import { collection, getDocs } from 'firebase/firestore'
-import { useRouter } from 'vue-router'
 import { Category } from '@/common/models/categoryModels'
 
 // FETCH ALL CATEGORIES AND SUBCATEGORIES
 const categories = ref<Category[]>([])
 const db = useFirestore()
-const router = useRouter()
-
-
-//Dynamic router to category/subcategory listings
-const addRoutes = (categories: Category[]) => {
-  categories.forEach((category) => {
-    router.addRoute({
-      path: `/${category.name}`,
-      name: `${category.name}`,
-      component: () => import('@/adverisements/views/CommonList.vue'),
-      children: category.subcategories.map(subcategory => ({
-        path: subcategory.name,
-        name: `${subcategory.name}`,
-        component: () => import('@/adverisements/views/CommonList.vue')
-      }))
-    });
-  });
-};
 
 onMounted(() => {
   getDocs(collection(db, 'categories')).then((categoryEntries) => {
     categoryEntries.forEach((categoryEntry) => {
       categories.value.push(new Category(categoryEntry.data()))
     });
-    addRoutes(categories.value);
   });
 });
 

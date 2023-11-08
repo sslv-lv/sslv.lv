@@ -13,20 +13,9 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/category/:name',
+      path: '/:mainCategory/:subCategory',
       name: 'category',
       component: CommonList
-    },
-    {
-      path: '/listing/:id',
-      name: 'listing',
-      component: ListingView
-    },
-    {
-      // Catch-all redirect for 404, this has to stay last in array
-      path: "/:pathMatch(.*)*",
-      name: 'not-found',
-      redirect: 'home',
     },
     {
     path: '/advertisements/create',
@@ -36,9 +25,15 @@ const router = createRouter({
     {
       path: '/:mainCategory/:subCategory/:id',
       name: 'Listing',
-      component: () => import('@/common/views/ListingView.vue'),
+      component: ListingView,
       props: true
-    }
+    },
+    {
+      // Catch-all redirect for 404, this has to stay last in array
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      redirect: '/',
+    },
   ]
 })
 
