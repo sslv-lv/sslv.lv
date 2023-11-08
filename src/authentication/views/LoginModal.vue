@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useUserStore } from '@/common/stores/userStore'
 import { User } from '@/common/models/userModels'
-import { useToastStore } from '../../common/stores/toastStore'
+import { useToastStore } from '@/common/stores/toastStore'
 import { CModal, CModalHeader, CModalBody, CModalTitle, CModalFooter } from '@coreui/bootstrap-vue'
 import { getUser } from '@/authentication/services/userService'
 

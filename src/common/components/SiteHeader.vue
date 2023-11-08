@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { useUserStore } from '@/common/stores/userStore'
-import { User } from '../models/userModels'
+import { User } from '@/common/models/userModels'
+import { useToastStore } from '@/common/stores/toastStore'
 
 const userStore = useUserStore()
+const toastStore = useToastStore()
 
 function alert(a: string) {
-  window.alert(a)
+  toastStore.createToast(a, '', 'danger')
 }
 </script>
 
@@ -16,7 +18,7 @@ function alert(a: string) {
       <div class="navbar-brand">
         <RouterLink to="/"> <span>SSLV.LV</span> </RouterLink>
       </div>
-      <ul class="navbar-nav flex-grow-1 justify-content-between">
+      <ul class="navbar-nav flex-grow-1 d-flex">
         <li class="nav-item">
           <RouterLink to="/">
             <a class="nav-link active text-center" aria-current="page" href="#"> Sākums </a>
@@ -27,21 +29,22 @@ function alert(a: string) {
             <a class="nav-link active text-center" aria-current="page"> Ievietot sludinājumu </a>
           </RouterLink>
         </li>
-        <li class="nav-item">
-          <a v-if="!userStore.isLoggedIn" class="nav-link text-center" @click="userStore.loginModalVisible = true">
-            Ienākt
-          </a>
-          <template v-else>
-            <span>Sveiks {{ userStore.currentUser.name }}</span>
-            <a class="nav-link text-center" @click="userStore.currentUser = new User()"> Iziet </a>
-          </template>
+        <li class="flex-grow-1"><!-- spacer --></li>
+        <li v-if="!userStore.isLoggedIn" class="nav-item">
+          <a class="nav-link text-center" @click="userStore.loginModalVisible = true"> Ienākt </a>
         </li>
+        <template v-else>
+          <li class="nav-item d-flex align-items-center">
+            <div class="mb-0 me-3 fw-bold">Sveiks {{ userStore.currentUser.name }}!</div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-center" @click="userStore.currentUser = new User()"> Iziet </a>
+          </li>
+        </template>
       </ul>
-      <form class="d-flex ms-3" role="search">
+      <form class="d-flex ms-3" role="search" @submit.prevent="alert('Not yet implemented')">
         <input class="form-control me-2" type="search" placeholder="Meklēt" aria-label="Meklēt" />
-        <button class="btn btn-outline-success" type="submit" @click="alert('Meklējam kaut ko')">
-          Meklēt
-        </button>
+        <button class="btn btn-outline-dark" type="submit">Meklēt</button>
       </form>
     </div>
   </header>

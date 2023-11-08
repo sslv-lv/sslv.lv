@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Timestamp, doc, addDoc, collection } from 'firebase/firestore'
+import { Timestamp, addDoc, collection } from 'firebase/firestore'
 import { ref } from 'vue'
 import { useFirestore } from 'vuefire'
 import { useUserStore } from '@/common/stores/userStore'
