@@ -88,9 +88,28 @@ const closeChat = () => {
   max-width: 1280px;
   margin-top: 100px;
   background: linear-gradient(to bottom, var(--c-platinum), var(--color-background));
-
   border-radius: 15px;
-  clear: both;
+  position: relative;
+  /* Set position to relative to contain the absolutely positioned button */
+}
+
+.chat-button-container {
+  position: absolute;
+  bottom: 20px;
+  /* Adjust the distance from the bottom as needed */
+  right: 20px;
+  /* Adjust the distance from the right as needed */
+  background-color: #0d2335;
+  color: white;
+  border: 1px solid #2d220b;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.chat-button-container:hover {
+  background-color: #2d220b;
 }
 
 .card {
