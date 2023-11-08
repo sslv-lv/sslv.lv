@@ -4,10 +4,12 @@ import { useFirestore } from 'vuefire'
 import { collection, getDocs } from 'firebase/firestore'
 import { Category } from '@/common/models/categoryModels'
 import ChatModal from '@/chat/views/ChatModal.vue'; // Adjust the import path based on your project structure
-
+//import { ChatMessage } from '@/chat/services/types.ts'
 // FETCH ALL CATEGORIES AND SUBCATEGORIES
 const categories = ref<Category[]>([])
 const isChatVisible = ref(false);
+//const messages = ref<ChatMessage[]>([]);
+
 const db = useFirestore()
 getDocs(collection(db, 'categories')).then((categoryEntries) => {
   categoryEntries.forEach((categoryEntry) => {
@@ -36,6 +38,10 @@ const closeChat = () => {
       <li class="p-2 border-bottom chat-button" @click="toggleChat">
         <i class="fas fa-comment"></i> Open Chat
       </li>
+
+      <!-- Chat modal -->
+      <ChatModal v-if="isChatVisible" @closeChat="closeChat" />
+
       <div class="row d-flex">
         <div class="col-md-4 d-flex flex-column" v-for="category in categories" :key="category.name">
           <div class="card mb-3 flex-grow-1 position-relative">
