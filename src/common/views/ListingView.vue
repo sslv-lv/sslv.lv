@@ -2,7 +2,7 @@
   <div class="ad-creation">
     <fieldset>
       <div v-if="listing">
-        <h1>{{ listing.title }}</h1>
+        <h1 class="mt-4">{{ listing.title }}</h1>
 
         <div v-if="listing.images.length > 0" class="image-preview">
           <img :src="currentImageUrl" alt="Selected image">
@@ -18,7 +18,7 @@
 
         <p class="description">{{ listing.description }}</p>
 
-        <div class="email-button">
+        <div class="email-button mt-4">
           <button @click="emailListingAuthor">Rakstīt sludinājuma autoram!</button>
         </div>
       </div>
@@ -33,6 +33,8 @@
 .ad-creation {
   width: 600px;
   margin: auto;
+  color: var(--c-platinum);
+  font-size: 1.05rem;
 }
 
 h1 {
