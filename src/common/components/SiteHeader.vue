@@ -22,12 +22,13 @@ function alert(a: string) {
             <a class="nav-link active text-center" aria-current="page" href="#"> Sākums </a>
           </RouterLink>
         </li>
+        <li v-if="userStore.isLoggedIn" class="nav-item">
+          <RouterLink :to="{ name: 'AdCreation' }">
+            <a class="nav-link active text-center" aria-current="page"> Ievietot sludinājumu </a>
+          </RouterLink>
+        </li>
         <li class="nav-item">
-          <a
-            v-if="!userStore.isLoggedIn"
-            class="nav-link text-center"
-            @click="userStore.loginModalVisible = true"
-          >
+          <a v-if="!userStore.isLoggedIn" class="nav-link text-center" @click="userStore.loginModalVisible = true">
             Ienākt
           </a>
           <template v-else>
