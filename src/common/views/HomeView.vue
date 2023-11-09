@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import { ref, onMounted } from 'vue'
 import { useFirestore } from 'vuefire'
 import { collection, getDocs } from 'firebase/firestore'
@@ -12,14 +11,12 @@ onMounted(() => {
   getDocs(collection(db, 'categories')).then((categoryEntries) => {
     categoryEntries.forEach((categoryEntry) => {
       categories.value.push(new Category(categoryEntry.data()))
-    });
-  });
-});
+    })
+  })
+})
 
 const isHoveringMap = ref<{ [key: string]: boolean }>({})
-
 </script>
-
 
 <template>
   <div class="d-flex justify-content-center">
@@ -27,29 +24,43 @@ const isHoveringMap = ref<{ [key: string]: boolean }>({})
       <h1>SSLV.LV</h1>
       <p>Tavs ceļš uz ātrākajiem un grandiozākajiem pirkumiem!</p>
       <div class="row d-flex">
-        <div class="col-md-4 d-flex flex-column" v-for="category in categories" :key="category.name">
+        <div
+          class="col-md-4 d-flex flex-column"
+          v-for="category in categories"
+          :key="category.name"
+        >
           <div class="card mb-3 flex-grow-1 position-relative">
-            <img :src="`/common/assets/icons/${category.iconUrl}`" alt="icon" class="card-img-top mx-auto mt-2" />
+            <img
+              :src="`/common/assets/icons/${category.iconUrl}`"
+              alt="icon"
+              class="card-img-top mx-auto mt-2"
+            />
             <div class="card-body">
               <h5 class="card-title">{{ category.name }}</h5>
             </div>
-            <div class="submenu bg-light rounded shadow-sm position-absolute top-0 start-0 w-100 h-100">
+            <div
+              class="submenu bg-light rounded shadow-sm position-absolute top-0 start-0 w-100 h-100"
+            >
               <ul class="list-unstyled mb-0 h-100 d-flex flex-column justify-content-center">
-                <li v-for="subcategory in category.subcategories" :key="subcategory.name" class="p-2 border-bottom"
-                  @mouseover="isHoveringMap[subcategory.name] = true"
-                  @mouseleave="isHoveringMap[subcategory.name] = false"
-                  :class="{ 'bg-secondary text-white': isHoveringMap[subcategory.name] }">
-                  <RouterLink class="no-underline" :to="`/${category.name}/${subcategory.name}`">
+                <RouterLink
+                  v-for="subcategory in category.subcategories"
+                  :key="subcategory.name"
+                  :to="`/${category.name}/${subcategory.name}`"
+                >
+                  <li
+                    class="p-2 border-bottom no-underline"
+                    @mouseover="isHoveringMap[subcategory.name] = true"
+                    @mouseleave="isHoveringMap[subcategory.name] = false"
+                    :class="{ 'bg-secondary text-white': isHoveringMap[subcategory.name] }"
+                  >
                     {{ subcategory.name }}
-                  </RouterLink>
-
-                </li>
+                  </li>
+                </RouterLink>
               </ul>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
