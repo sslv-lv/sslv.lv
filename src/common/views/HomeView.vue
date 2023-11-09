@@ -4,7 +4,6 @@ import { ref, onMounted } from 'vue'
 import { useFirestore } from 'vuefire'
 import { collection, getDocs } from 'firebase/firestore'
 import { Category } from '@/common/models/categoryModels'
-
 // FETCH ALL CATEGORIES AND SUBCATEGORIES
 const categories = ref<Category[]>([])
 const db = useFirestore()
@@ -19,7 +18,6 @@ onMounted(() => {
 
 const isHoveringMap = ref<{ [key: string]: boolean }>({})
 
-
 </script>
 
 
@@ -28,7 +26,6 @@ const isHoveringMap = ref<{ [key: string]: boolean }>({})
     <div class="container-lg m shadow p-5">
       <h1>SSLV.LV</h1>
       <p>Tavs ceļš uz ātrākajiem un grandiozākajiem pirkumiem!</p>
-
       <div class="row d-flex">
         <div class="col-md-4 d-flex flex-column" v-for="category in categories" :key="category.name">
           <div class="card mb-3 flex-grow-1 position-relative">
